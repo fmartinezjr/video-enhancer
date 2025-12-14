@@ -3,8 +3,8 @@ import numpy as np
 import torch
 import cv2
 
-from fastdvdnet.models import FastDVDnet
-from fastdvdnet.utils import remove_dataparallel_wrapper
+from models import FastDVDnet
+from utils import remove_dataparallel_wrapper
 
 
 def load_model(model_path=None, device=None):

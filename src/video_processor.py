@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent / "fastdvdnet"))
+
 import argparse
 from denoiser import load_model
 from video_enhancer import process_video
