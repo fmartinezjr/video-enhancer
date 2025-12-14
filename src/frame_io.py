@@ -52,11 +52,13 @@ def extract_audio(video_path, audio_path):
     """Extract audio from video using FFmpeg."""
     cmd = [
         "ffmpeg",
-        "-i", str(video_path),
+        "-i",
+        str(video_path),
         "-vn",  # No video
-        "-acodec", "copy",  # Copy audio codec
+        "-acodec",
+        "copy",  # Copy audio codec
         "-y",  # Overwrite output file
-        str(audio_path)
+        str(audio_path),
     ]
 
     result = subprocess.run(cmd, capture_output=True, text=True)
@@ -67,13 +69,17 @@ def merge_audio_video(video_path, audio_path, output_path):
     """Merge audio and video using FFmpeg."""
     cmd = [
         "ffmpeg",
-        "-i", str(video_path),
-        "-i", str(audio_path),
-        "-c:v", "copy",  # Copy video codec
-        "-c:a", "aac",   # Encode audio as AAC
-        "-shortest",     # Match shortest stream duration
-        "-y",            # Overwrite output file
-        str(output_path)
+        "-i",
+        str(video_path),
+        "-i",
+        str(audio_path),
+        "-c:v",
+        "copy",  # Copy video codec
+        "-c:a",
+        "aac",  # Encode audio as AAC
+        "-shortest",  # Match shortest stream duration
+        "-y",  # Overwrite output file
+        str(output_path),
     ]
 
     subprocess.run(cmd, capture_output=True, text=True, check=True)
