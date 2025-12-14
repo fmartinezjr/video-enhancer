@@ -12,6 +12,7 @@ Removes noise using FastDVDnet
 python3 -m venv venv
 source venv/bin/activate
 pip install -e .
+pip install -e ".[dev]" #for dev
 ```
 
 ## Usage
@@ -53,3 +54,16 @@ python src/video_processor.py --help
 
 - **With GPU (M1/M2/M3 or NVIDIA):** ~5-15 minutes per minute of video
 - **CPU only:** Much slower (hours for longer videos)
+
+## Local Dev Checks
+
+```bash
+# Format code
+black src/
+
+# Lint code
+ruff check src/
+
+# Type check
+mypy src/
+```
