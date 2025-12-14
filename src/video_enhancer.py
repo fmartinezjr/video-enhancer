@@ -3,8 +3,8 @@ from pathlib import Path
 import cv2
 from tqdm import tqdm
 
-from frame_io import extract_frames, load_frames, reassemble_video
-from denoiser import denoise_frames
+from .frame_io import extract_frames, load_frames, reassemble_video
+from .denoiser import denoise_frames
 
 
 def process_video(

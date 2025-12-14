@@ -2,9 +2,15 @@ import os
 import numpy as np
 import torch
 import cv2
+import sys
+from pathlib import Path
 
-from models import FastDVDnet
-from utils import remove_dataparallel_wrapper
+# Add fastdvdnet to path
+fastdvdnet_path = Path(__file__).parent.parent / "fastdvdnet"
+sys.path.insert(0, str(fastdvdnet_path))
+
+from models import FastDVDnet  # type: ignore
+from utils import remove_dataparallel_wrapper  # type: ignore
 
 
 def load_model(model_path=None, device=None):
