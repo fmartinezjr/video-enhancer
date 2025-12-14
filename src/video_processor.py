@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
-from video_enhancer import load_model, process_video
+from denoiser import load_model
+from video_enhancer import process_video
 
 
 def main():
