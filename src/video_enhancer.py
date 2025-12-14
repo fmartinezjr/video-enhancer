@@ -3,7 +3,7 @@ from pathlib import Path
 import cv2
 from tqdm import tqdm
 
-from .frame_io import extract_frames, load_frames, reassemble_video
+from .frame_io import extract_frames, load_frames, reassemble_video, extract_audio
 from .denoiser import denoise_frames
 
 
@@ -27,8 +27,16 @@ def process_video(
 
     frames_dir = temp_path / "frames"
     enhanced_dir = temp_path / "enhanced"
+    audio_path = temp_path / "audio.aac"
 
     try:
+        print("Extracting audio")
+        has_audio = extract_audio(input_path, audio_path)
+        if has_audio:
+            print("Audio extracted successfully")
+        else:
+            print("No audio track found in input video")
+
         fps, total_frames = extract_frames(input_path, frames_dir)
 
         enhanced_dir.mkdir(parents=True, exist_ok=True)
@@ -61,7 +69,7 @@ def process_video(
                 pbar.update(1)
 
         print("Reassembling video...")
-        reassemble_video(enhanced_dir, output_path, fps)
+        reassemble_video(enhanced_dir, output_path, fps, audio_path if has_audio else None)
 
         print(f"✓ Enhanced video saved to: {output_path}")
 
