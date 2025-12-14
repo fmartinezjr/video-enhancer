@@ -20,11 +20,11 @@ def load_model(model_path=None, device=None):
     """
     if device is None:
         if torch.cuda.is_available():
-            device = torch.device('cuda')
+            device = torch.device("cuda")
         elif torch.backends.mps.is_available():
-            device = torch.device('mps')
+            device = torch.device("mps")
         else:
-            device = torch.device('cpu')
+            device = torch.device("cpu")
     else:
         device = torch.device(device)
 
@@ -65,7 +65,9 @@ def denoise_frames(model, device, frames, noise_sigma=25):
         frame_tensors.append(frame_t)
 
     input_tensor = torch.stack(frame_tensors, dim=0)
-    input_tensor = input_tensor.view(1, -1, input_tensor.shape[2], input_tensor.shape[3])
+    input_tensor = input_tensor.view(
+        1, -1, input_tensor.shape[2], input_tensor.shape[3]
+    )
     input_tensor = input_tensor.to(device)
 
     noise_map = torch.FloatTensor([noise_sigma / 255.0])

@@ -7,7 +7,9 @@ from frame_io import extract_frames, load_frames, reassemble_video
 from denoiser import denoise_frames
 
 
-def process_video(model, device, input_video, output_video, noise_sigma=25, temp_dir="temp"):
+def process_video(
+    model, device, input_video, output_video, noise_sigma=25, temp_dir="temp"
+):
     """
     Pipeline: extract → denoise → reassemble.
 
@@ -49,14 +51,16 @@ def process_video(model, device, input_video, output_video, noise_sigma=25, temp
                     dst = enhanced_dir / f"frame_{i:05d}.png"
                     shutil.copy(src, dst)
                 else:
-                    enhanced_frame = denoise_frames(model, device, frame_sequence, noise_sigma)
+                    enhanced_frame = denoise_frames(
+                        model, device, frame_sequence, noise_sigma
+                    )
 
                     output_frame_path = enhanced_dir / f"frame_{i:05d}.png"
                     cv2.imwrite(str(output_frame_path), enhanced_frame)
 
                 pbar.update(1)
 
-        print(f"Reassembling video...")
+        print("Reassembling video...")
         reassemble_video(enhanced_dir, output_path, fps)
 
         print(f"✓ Enhanced video saved to: {output_path}")

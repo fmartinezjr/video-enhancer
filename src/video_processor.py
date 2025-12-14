@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).parent.parent / "fastdvdnet"))
 
 import argparse
@@ -13,9 +14,15 @@ def main():
     parser.add_argument("input", help="Input video file")
     parser.add_argument("output", help="Output video file")
     parser.add_argument("--model", help="Path to pretrained model weights")
-    parser.add_argument("--noise", type=int, default=25, help="Noise sigma (0-255, default: 25)")
-    parser.add_argument("--device", choices=['cuda', 'mps', 'cpu'], help="Device to use")
-    parser.add_argument("--temp-dir", default="temp", help="Temporary directory for frames")
+    parser.add_argument(
+        "--noise", type=int, default=25, help="Noise sigma (0-255, default: 25)"
+    )
+    parser.add_argument(
+        "--device", choices=["cuda", "mps", "cpu"], help="Device to use"
+    )
+    parser.add_argument(
+        "--temp-dir", default="temp", help="Temporary directory for frames"
+    )
 
     args = parser.parse_args()
 
@@ -27,7 +34,7 @@ def main():
         input_video=args.input,
         output_video=args.output,
         noise_sigma=args.noise,
-        temp_dir=args.temp_dir
+        temp_dir=args.temp_dir,
     )
 
 

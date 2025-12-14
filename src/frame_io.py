@@ -58,7 +58,7 @@ def reassemble_video(frames_dir, output_path, fps):
     first_frame = cv2.imread(str(frame_files[0]))
     height, width = first_frame.shape[:2]
 
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
     out = cv2.VideoWriter(str(output_path), fourcc, fps, (width, height))
 
     for frame_file in tqdm(frame_files, desc="Writing video"):
