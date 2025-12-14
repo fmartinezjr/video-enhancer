@@ -30,6 +30,8 @@ def process_video(
     audio_path = temp_path / "audio.aac"
 
     try:
+        temp_path.mkdir(parents=True, exist_ok=True)
+
         print("Extracting audio")
         has_audio = extract_audio(input_path, audio_path)
         if has_audio:
@@ -69,7 +71,9 @@ def process_video(
                 pbar.update(1)
 
         print("Reassembling video...")
-        reassemble_video(enhanced_dir, output_path, fps, audio_path if has_audio else None)
+        reassemble_video(
+            enhanced_dir, output_path, fps, audio_path if has_audio else None
+        )
 
         print(f"✓ Enhanced video saved to: {output_path}")
 
