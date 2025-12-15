@@ -1,6 +1,10 @@
-FROM python:3.12-slim
+# This Dockerfile is optimized for AWS Batch with GPU support.
+# For mac, run natively with Python to use MPS acceleration.
+FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
 
 WORKDIR /app
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install system dependencies for OpenCV
 RUN apt-get update && apt-get install -y \
@@ -10,7 +14,6 @@ RUN apt-get update && apt-get install -y \
     libxrender-dev \
     libgomp1 \
     libgl1 \
-    libglib2.0-0 \
     git \
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
