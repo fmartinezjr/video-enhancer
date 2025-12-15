@@ -5,15 +5,6 @@ resource "aws_s3_bucket" "videos" {
 
 data "aws_caller_identity" "current" {}
 
-# Enable versioning
-resource "aws_s3_bucket_versioning" "videos" {
-  bucket = aws_s3_bucket.videos.id
-
-  versioning_configuration {
-    status = "Enabled"
-  }
-}
-
 # Block public access
 resource "aws_s3_bucket_public_access_block" "videos" {
   bucket = aws_s3_bucket.videos.id
