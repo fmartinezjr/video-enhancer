@@ -56,3 +56,18 @@ runs/
 fastdvdnet/
 
 .command
+
+# Terraform
+tf/.terraform/
+tf/.terraform.lock.hcl
+tf/terraform.tfstate
+tf/terraform.tfstate.backup
+tf/*.tfvars
+!tf/*.tfvars.example
+tf/crash.log
+tf/override.tf
+tf/override.tf.json
+tf/*_override.tf
+tf/*_override.tf.json
+tf/.terraformrc
+tf/terraform.rc
