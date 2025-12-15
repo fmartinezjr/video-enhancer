@@ -1,7 +1,9 @@
 resource "aws_s3_bucket" "videos" {
-  bucket = var.app_name
+  bucket = "${var.app_name}-${data.aws_caller_identity.current.account_id}"
   tags   = var.tags
 }
+
+data "aws_caller_identity" "current" {}
 
 # Enable versioning
 resource "aws_s3_bucket_versioning" "videos" {
