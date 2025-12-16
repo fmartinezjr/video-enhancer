@@ -30,3 +30,13 @@ module "batch" {
   region             = var.aws_region
   tags               = var.tags
 }
+
+module "lambda" {
+  source                   = "./modules/lambda"
+  app_name                 = var.app_name
+  bucket_name              = module.s3.bucket_name
+  bucket_arn               = module.s3.bucket_arn
+  batch_job_queue_arn      = module.batch.job_queue_arn
+  batch_job_definition_arn = module.batch.job_definition_arn
+  tags                     = var.tags
+}
