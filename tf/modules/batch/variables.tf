@@ -13,6 +13,11 @@ variable "bucket_name" {
   type        = string
 }
 
+variable "sns_topic_arn" {
+  description = "ARN of the SNS topic for notifications"
+  type        = string
+}
+
 variable "instance_types" {
   description = "EC2 instance types for Batch compute environment"
   type        = list(string)
