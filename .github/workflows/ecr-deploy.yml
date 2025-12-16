@@ -16,6 +16,9 @@ jobs:
       - name: Clone fastdvdnet
         run: git clone https://github.com/m-tassano/fastdvdnet.git
 
+      - name: Fix scikit-image import in fastdvdnet
+        run: sed -i 's/from skimage.measure.simple_metrics import compare_psnr/from skimage.metrics import peak_signal_noise_ratio as compare_psnr/' fastdvdnet/utils.py
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
