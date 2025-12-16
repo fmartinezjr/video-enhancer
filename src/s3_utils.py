@@ -43,7 +43,8 @@ def send_notification(message: str, subject: str = "Video Processing Complete") 
     if not sns_topic_arn:
         return
 
-    sns_client = boto3.client("sns")
+    region = sns_topic_arn.split(":")[3]
+    sns_client = boto3.client("sns", region_name=region)
     try:
         sns_client.publish(TopicArn=sns_topic_arn, Subject=subject, Message=message)
         print(f"Notification sent: {subject}")
