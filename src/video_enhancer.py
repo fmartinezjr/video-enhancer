@@ -44,8 +44,13 @@ def process_video(
         enhanced_dir.mkdir(parents=True, exist_ok=True)
 
         print(f"Processing {total_frames} frames...")
-        with tqdm(total=total_frames, desc="Denoising frames") as pbar:
+        with tqdm(total=total_frames, desc="Denoising frames", mininterval=1.0) as pbar:
             for i in range(total_frames):
+
+                if i > 0 and i % 10 == 0:
+                    print(
+                        f"Denoised {i}/{total_frames} frames ({i*100//total_frames}%)"
+                    )
 
                 if i < 2:
                     start_idx = 0
