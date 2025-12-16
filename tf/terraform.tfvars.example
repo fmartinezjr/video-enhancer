@@ -3,7 +3,7 @@
 app_name           = "video-enhancer"
 notification_email = "your-email@example.com"
 
-batch_instance_types = ["p3.2xlarge", "g4dn.xlarge"]
+batch_instance_types = ["g4dn.xlarge", "g4dn.2xlarge"]
 
 tags = {
   Environment = "production"
