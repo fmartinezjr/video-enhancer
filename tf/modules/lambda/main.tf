@@ -80,9 +80,9 @@ resource "aws_iam_role_policy" "lambda_s3" {
   })
 }
 
-resource "aws_lambda_function" "job_submitter" {
+resource "aws_lambda_function" "s3_to_batch" {
   filename         = data.archive_file.lambda_zip.output_path
-  function_name    = "${var.app_name}-job-submitter"
+  function_name    = "${var.app_name}-s3-to-batch"
   role             = aws_iam_role.lambda_role.arn
   handler          = "lambda_function.lambda_handler"
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
@@ -101,7 +101,7 @@ resource "aws_lambda_function" "job_submitter" {
 }
 
 resource "aws_cloudwatch_log_group" "lambda_logs" {
-  name              = "/aws/lambda/${aws_lambda_function.job_submitter.function_name}"
+  name              = "/aws/lambda/${aws_lambda_function.s3_to_batch.function_name}"
   retention_in_days = 7
 
   tags = var.tags
@@ -111,7 +111,7 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
   bucket = var.bucket_name
 
   lambda_function {
-    lambda_function_arn = aws_lambda_function.job_submitter.arn
+    lambda_function_arn = aws_lambda_function.s3_to_batch.arn
     events              = ["s3:ObjectCreated:*"]
     filter_prefix       = "input/"
   }
@@ -122,7 +122,7 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
 resource "aws_lambda_permission" "allow_s3" {
   statement_id  = "AllowExecutionFromS3"
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.job_submitter.function_name
+  function_name = aws_lambda_function.s3_to_batch.function_name
   principal     = "s3.amazonaws.com"
   source_arn    = var.bucket_arn
 }
