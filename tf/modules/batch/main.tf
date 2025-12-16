@@ -88,6 +88,25 @@ resource "aws_iam_role_policy" "batch_job_s3_policy" {
   })
 }
 
+resource "aws_iam_role_policy" "batch_job_sns_policy" {
+  name = "${var.app_name}-batch-job-sns"
+  role = aws_iam_role.batch_job_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "sns:Publish"
+        ]
+        Resource = var.sns_topic_arn
+      }
+    ]
+  })
+}
+
+# Security group for Batch compute environment
 resource "aws_security_group" "batch" {
   name        = "${var.app_name}-batch-sg"
   description = "Security group for Batch compute environment"
@@ -202,6 +221,13 @@ resource "aws_batch_job_definition" "video_processor" {
       {
         type  = "MEMORY"
         value = tostring(var.job_memory)
+      }
+    ]
+
+    environment = [
+      {
+        name  = "SNS_TOPIC_ARN"
+        value = var.sns_topic_arn
       }
     ]
 
