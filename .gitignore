@@ -71,3 +71,4 @@ tf/*_override.tf
 tf/*_override.tf.json
 tf/.terraformrc
 tf/terraform.rc
+tf/modules/lambda/lambda_function.zip
