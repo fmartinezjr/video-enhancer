@@ -44,6 +44,7 @@ def submit_batch_job(job_name, job_queue, job_definition, input_uri, output_uri)
             'command': [
                 input_uri,
                 output_uri,
+                '--model', '/app/fastdvdnet/model.pth',
                 '--noise', '25'
             ]
         }
