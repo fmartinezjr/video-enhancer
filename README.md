@@ -20,13 +20,13 @@ pip install -e ".[dev]" #for dev
 ### Basic usage
 
 ```bash
-python -m src.video_processor input/my_video.mp4 output/enhanced_video.mp4 --model fastdvdnet/model.pth
+python -m src.video_processor_local input/my_video.mp4 output/enhanced_video.mp4 --model fastdvdnet/model.pth
 ```
 
 ### Adjust noise level
 
 ```bash
-python -m src.video_processor input/my_video.mp4 output/enhanced_video.mp4 --model fastdvdnet/model.pth --noise 30
+python -m src.video_processor_local input/my_video.mp4 output/enhanced_video.mp4 --model fastdvdnet/model.pth --noise 30
 ```
 
 Higher noise values (0-255) apply more aggressive denoising. Default is 25.
@@ -34,13 +34,13 @@ Higher noise values (0-255) apply more aggressive denoising. Default is 25.
 ### Force CPU mode
 
 ```bash
-python -m src.video_processor input/my_video.mp4 output/enhanced_video.mp4 --device cpu
+python -m src.video_processor_local input/my_video.mp4 output/enhanced_video.mp4 --device cpu
 ```
 
 ### All options
 
 ```bash
-python -m src.video_processor --help
+python -m src.video_processor_local --help
 ```
 
 ## How It Works

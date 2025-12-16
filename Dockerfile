@@ -26,4 +26,4 @@ RUN pip install --no-cache-dir .
 
 ENV PYTHONPATH=/app
 
-ENTRYPOINT ["python", "-u", "-m", "src.video_processor"]
+ENTRYPOINT ["python", "-u", "-m", "src.video_processor_batch"]

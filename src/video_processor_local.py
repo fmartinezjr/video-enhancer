@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""
+Video enhancement using FastDVDnet.
+Local file processing only.
+"""
+
 import sys
 from pathlib import Path
 
@@ -10,7 +15,9 @@ from .video_enhancer import process_video
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Enhance videos using FastDVDnet")
+    parser = argparse.ArgumentParser(
+        description="Enhance videos using FastDVDnet"
+    )
     parser.add_argument("input", help="Input video file")
     parser.add_argument("output", help="Output video file")
     parser.add_argument("--model", help="Path to pretrained model weights")
