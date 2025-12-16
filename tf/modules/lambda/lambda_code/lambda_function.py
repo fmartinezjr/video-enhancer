@@ -51,7 +51,7 @@ def submit_batch_job(job_name, job_queue, job_definition, input_uri, output_uri)
     return response['jobId']
 
 
-def lambda_handler(event):
+def lambda_handler(event, context):
     """
     Process S3 event and submit Batch job for video processing.
 
