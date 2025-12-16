@@ -67,3 +67,9 @@ ruff check src/
 # Type check
 mypy src/
 ```
+
+## Run on AWS Infra
+
+```bash
+aws s3 cp video.mp4 s3://$BUCKET/input/
+```
