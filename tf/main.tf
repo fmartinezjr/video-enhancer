@@ -19,5 +19,6 @@ module "batch" {
   max_vcpus          = var.batch_max_vcpus
   job_vcpus          = var.job_vcpus
   job_memory         = var.job_memory
+  region             = var.aws_region
   tags               = var.tags
 }
