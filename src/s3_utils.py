@@ -3,10 +3,7 @@
 import os
 from urllib.parse import urlparse
 
-try:
-    import boto3
-except ImportError:
-    boto3 = None
+import boto3
 
 
 def is_s3_uri(path: str) -> bool:
@@ -22,9 +19,6 @@ def parse_s3_uri(s3_uri: str) -> tuple[str, str]:
 
 def download_from_s3(s3_uri: str, local_path: str) -> None:
     """Download file from S3 to local path."""
-    if boto3 is None:
-        raise ImportError("boto3 is required for S3 operations")
-
     bucket, key = parse_s3_uri(s3_uri)
     s3_client = boto3.client("s3")
 
@@ -35,9 +29,6 @@ def download_from_s3(s3_uri: str, local_path: str) -> None:
 
 def upload_to_s3(local_path: str, s3_uri: str) -> None:
     """Upload file from local path to S3."""
-    if boto3 is None:
-        raise ImportError("boto3 is required for S3 operations")
-
     bucket, key = parse_s3_uri(s3_uri)
     s3_client = boto3.client("s3")
 
@@ -50,10 +41,6 @@ def send_notification(message: str, subject: str = "Video Processing Complete") 
     """Send SNS notification if SNS_TOPIC_ARN is set."""
     sns_topic_arn = os.environ.get("SNS_TOPIC_ARN")
     if not sns_topic_arn:
-        return
-
-    if boto3 is None:
-        print("Warning: boto3 not available, skipping notification")
         return
 
     sns_client = boto3.client("sns")
